@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Developer portfolio — MERN, Next.js, FastAPI, AI and DevOps." />
+  <title>dev.portfolio — developer workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="navigation.css" />
+  <link rel="stylesheet" href="terminal.css" />
+</head>
+<body>
+  <a class="skip-link" href="#editor">Skip to portfolio content</a>
+  <div class="app-shell">
+    <header class="titlebar" aria-label="Application toolbar">
+      <button class="menu-button" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="brand"><span class="brand-mark">&lt;/&gt;</span><span>developer<span class="muted">.portfolio</span></span></div>
+      <div class="titlebar-spacer"></div>
+      <button class="terminal-toggle" id="terminalToggle" aria-expanded="false" aria-controls="terminalPanel">▸_ Terminal</button>
+    </header>
+
+    <div class="workspace">
+      <aside class="activity-bar" aria-label="Workspace tools">
+        <button class="tool active" aria-label="Explorer">▱</button>
+        <button class="tool" aria-label="Search">⌕</button>
+        <button class="tool" aria-label="Source control">⑂</button>
+        <button class="tool" aria-label="Extensions">▦</button>
+        <span class="tool-spacer"></span><button class="tool" aria-label="Settings">⚙</button>
+      </aside>
+
+      <aside class="explorer" id="explorer" aria-label="Portfolio navigation">
+        <div class="explorer-heading"><span>EXPLORER</span><button id="closeMenu" aria-label="Close navigation">×</button></div>
+        <div class="project-root"><span class="chev">⌄</span> PORTFOLIO</div>
+        <nav>
+          <a class="tree-item current" href="#about" data-tab="about.md"><span class="file-icon md">M↓</span>about.md</a>
+          <a class="tree-item" href="#skills" data-tab="stack.ts"><span class="file-icon ts">TS</span>stack.ts</a>
+          <a class="tree-item" href="#projects" data-tab="projects.tsx"><span class="file-icon react">⚛</span>projects.tsx</a>
+          <a class="tree-item" href="#experience" data-tab="journey.json"><span class="file-icon json">{ }</span>journey.json</a>
+          <a class="tree-item" href="#contact" data-tab="contact.sh"><span class="file-icon shell">$_</span>contact.sh</a>
+        </nav>
+        <div class="explorer-bottom">
+          <span>OUTLINE</span><span>⌄</span>
+          <span>TIMELINE</span><span>⌄</span>
+        </div>
+      </aside>
+
+      <main class="editor-area" id="editor">
+        <div class="tabs" role="tablist" aria-label="Open files">
+          <button class="tab active" role="tab" aria-selected="true" data-target="about" data-file="about.md"><span class="file-icon md">M↓</span>about.md <b class="tab-close" data-close aria-label="Close about.md">×</b></button>
+          <button class="tab" role="tab" aria-selected="false" data-target="projects" data-file="projects.tsx"><span class="file-icon ts">TS</span>projects.tsx <b class="tab-close" data-close aria-label="Close projects.tsx">×</b></button>
+          <button class="tab" role="tab" aria-selected="false" data-target="contact" data-file="contact.sh"><span class="file-icon shell">$_</span>contact.sh <b class="tab-close" data-close aria-label="Close contact.sh">×</b></button>
+        </div>
+        <div class="breadcrumbs">portfolio <span>›</span> <strong>about.md</strong></div>
+
+        <div class="editor-scroll">
+          <section class="hero section" id="about">
+            <div class="line-numbers" aria-hidden="true">01<br>02<br>03<br>04<br>05<br>06<br>07<br>08<br>09<br>10</div>
+            <div class="hero-content">
+              <p class="code-comment">// hello, world — welcome to my corner of the internet.</p>
+              <p class="eyebrow"><span class="tag-pink">const</span> <span class="variable">developer</span> = <span class="string" id="profileTitle">"full-stack builder"</span>;</p>
+              <h1 id="profileHeadline">Building thoughtful<br><span class="gradient-text">systems for the web.</span></h1>
+              <p class="hero-copy" id="profileSummary">I build end-to-end products at the intersection of clean interfaces, reliable backends, and practical AI. From first commit to cloud deployment.</p>
+              <div class="hero-actions">
+                <a class="button primary" href="#projects">view_projects(); <span>→</span></a>
+                <a class="button ghost" href="#contact">get_in_touch()</a>
+              </div>
+              <div class="availability"><span class="pulse"></span> <span id="profileAvailability">Open to building meaningful things</span></div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <div class="orb orb-one"></div><div class="orb orb-two"></div>
+              <div class="code-card">
+                <div class="card-dots"><i></i><i></i><i></i></div>
+                <p><span class="purple">export default</span> <span class="blue">function</span> <span class="yellow">create</span>() {</p>
+                <p class="indent">return <span class="green">innovation</span>;</p>
+                <p>}</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="section content-section" id="skills">
+            <div class="section-label"><span>02</span> <strong>stack.ts</strong></div>
+            <div class="section-heading"><p class="code-comment">// the tools I reach for to turn ideas into shipping products.</p><h2>Technical toolkit</h2></div>
+            <div class="skill-grid" id="skillsGrid"></div>
+          </section>
+
+          <section class="section content-section" id="projects">
+            <div class="section-label"><span>03</span> <strong>projects.tsx</strong></div>
+            <div class="section-heading row"><div><p class="code-comment">// selected builds, experiments, and things I've learned from shipping.</p><h2>Featured projects</h2></div><span class="file-count" id="projectCount">05 files</span></div>
+            <div class="project-grid" id="projectsGrid"></div>
+          </section>
+
+          <section class="section content-section journey" id="experience">
+            <div class="section-label"><span>04</span> <strong>journey.json</strong></div>
+            <div class="section-heading"><p class="code-comment">// always learning in public, one well-placed semicolon at a time.</p><h2>How I work</h2></div>
+            <div class="journey-grid"><div class="json-card"><span class="key">"mindset"</span>: <span class="string">"learn deeply, ship thoughtfully"</span>,<br><span class="key">"focus"</span>: [<span class="string">"full-stack products"</span>, <span class="string">"AI workflows"</span>, <span class="string">"deployment"</span>],<br><span class="key">"currently"</span>: <span class="string">"turning ideas into useful software"</span></div><div class="work-note"><h3>From prototype to production</h3><p>I enjoy owning the connective tissue: translating a problem into a clear interface, shaping the API behind it, and making sure it can be confidently deployed.</p><p class="small-accent">Curious by default. Detail-oriented by choice.</p></div></div>
+          </section>
+
+          <section class="section contact-section" id="contact">
+            <div class="contact-code"><span class="code-comment"># Ready when you are</span><br><span class="green">$</span> <span class="command">let's build something useful</span><span class="cursor"></span></div>
+            <h2>Have a project in mind?</h2><p>Whether it starts as a rough idea or a demanding technical challenge, I’d love to hear what you’re working on.</p>
+            <div class="contact-actions"><a class="button primary" id="emailLink" href="mailto:hello@example.com">send_message() <span>↗</span></a><a class="social-link" id="githubLink" href="https://github.com/" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></div>
+          </section>
+          <footer><span>© 2026 · built with curiosity</span><span>Ln 42, Col 1 &nbsp; Spaces: 2 &nbsp; UTF-8</span></footer>
+        </div>
+        <section class="terminal-panel" id="terminalPanel" aria-label="Portfolio terminal" aria-hidden="true">
+          <div class="terminal-head"><span><i class="terminal-dot"></i>TERMINAL</span><button id="terminalClose" aria-label="Close terminal">×</button></div>
+          <div class="terminal-output" id="terminalOutput" aria-live="polite"><p>Portfolio terminal — type <span>help</span> for available commands.</p></div>
+          <form class="terminal-form" id="terminalForm"><label for="terminalInput">visitor@portfolio:~$</label><input id="terminalInput" autocomplete="off" spellcheck="false" aria-label="Terminal command" /><button type="submit">Run</button></form>
+        </section>
+      </main>
+    </div>
+    <div class="statusbar"><span><b>⑂ main</b><span class="hide-mobile"> ⟳ 0 &nbsp; × 0</span></span><span class="status-right"><span class="hide-mobile">◔ Prettier &nbsp; </span>JavaScript&nbsp; ◖</span></div>
+  </div>
+  <script src="portfolio.env.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
