@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,6 +24,61 @@
       --blue: #7fc8ff;
       --green: #8fdc8a;
       --yellow: #ffd580;
+      --status-bg: #8269c3;
+      --status-text: #f4f2ff;
+      --card-bg: linear-gradient(145deg, #1b1d23, #17181d);
+      --editor-bg: linear-gradient(90deg, #131419 0%, #14151a 100%);
+    }
+
+    html[data-theme="tokyo"] {
+      --bg: #0f111a;
+      --panel: #16161e;
+      --panel2: #1a1b26;
+      --line: #292e42;
+      --text: #c0caf5;
+      --muted: #7aa2f7;
+      --pink: #f7768e;
+      --purple: #bb9af7;
+      --blue: #7dcfff;
+      --green: #9ece6a;
+      --yellow: #e0af68;
+      --status-bg: #3d59a1;
+      --card-bg: linear-gradient(145deg, #1f2335, #16161e);
+      --editor-bg: linear-gradient(90deg, #16161e 0%, #1a1b26 100%);
+    }
+
+    html[data-theme="catppuccin"] {
+      --bg: #181825;
+      --panel: #1e1e2e;
+      --panel2: #313244;
+      --line: #45475a;
+      --text: #cdd6f4;
+      --muted: #a6adc8;
+      --pink: #f5c2e7;
+      --purple: #cba6f7;
+      --blue: #89b4fa;
+      --green: #a6e3a1;
+      --yellow: #f9e2af;
+      --status-bg: #6c7086;
+      --card-bg: linear-gradient(145deg, #26273a, #1e1e2e);
+      --editor-bg: linear-gradient(90deg, #181825 0%, #1e1e2e 100%);
+    }
+
+    html[data-theme="emerald"] {
+      --bg: #0d1312;
+      --panel: #121a18;
+      --panel2: #192421;
+      --line: #263833;
+      --text: #d7e8e3;
+      --muted: #7fa399;
+      --pink: #68e0cf;
+      --purple: #7fd8be;
+      --blue: #64b5f6;
+      --green: #8fdc8a;
+      --yellow: #ffd580;
+      --status-bg: #1f6f5c;
+      --card-bg: linear-gradient(145deg, #16221f, #111917);
+      --editor-bg: linear-gradient(90deg, #0e1514 0%, #121a18 100%);
     }
 
     * {
@@ -39,6 +94,14 @@
       background: var(--bg);
       color: var(--text);
       font-family: "DM Sans", sans-serif;
+    }
+
+    body.hide-line-numbers .line-numbers {
+      display: none;
+    }
+
+    body.compact-mode .content-section {
+      padding: 44px 7%;
     }
 
     .skip-link {
@@ -70,21 +133,22 @@
     .titlebar {
       height: 42px;
       flex: 0 0 42px;
-      background: #191a1f;
+      background: var(--panel);
       display: flex;
       align-items: center;
-      border-bottom: 1px solid #24262d;
+      border-bottom: 1px solid var(--line);
       color: #afb1ba;
       font-family: "DM Mono", monospace;
       font-size: 12px;
       padding: 0 14px;
+      gap: 10px;
     }
 
     .brand {
       display: flex;
       gap: 8px;
       align-items: center;
-      width: 270px;
+      width: 220px;
       font-weight: 500;
       color: #ddd;
     }
@@ -100,57 +164,49 @@
 
     .titlebar-center {
       flex: 1;
-      text-align: center;
-      color: #747782;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .command-trigger {
+      width: min(420px, 100%);
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      color: #9699a6;
+      border-radius: 5px;
+      padding: 5px 12px;
+      font: 11px "DM Mono", monospace;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .command-trigger:hover {
+      border-color: #5b5f70;
+      color: #e4e5eb;
+    }
+
+    .command-trigger kbd {
+      background: #ffffff0f;
+      border: 1px solid #3c3f4c;
+      border-radius: 3px;
+      padding: 1px 5px;
+      font: 10px "DM Mono", monospace;
+      color: #b7b9c4;
     }
 
     .titlebar-spacer {
       flex: 1;
+      display: none;
     }
 
-    .top-nav {
-      flex: 1;
+    .titlebar-actions {
       display: flex;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .top-nav a {
-      color: #9295a0;
-      text-decoration: none;
-      padding: 6px 10px;
-      border-radius: 4px;
-      transition: .2s;
-    }
-
-    .top-nav a:hover,
-    .top-nav a:focus-visible {
-      color: #fff;
-      background: #ffffff0b;
-      outline: none;
-    }
-
-    .window-controls {
-      display: flex;
-      gap: 14px;
-      width: 270px;
-      justify-content: flex-end;
-    }
-
-    .window-controls i {
-      display: block;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #3b3d45;
-    }
-
-    .window-controls i:nth-child(2) {
-      background: #c99e55;
-    }
-
-    .window-controls i:nth-child(3) {
-      background: #d76d70;
+      align-items: center;
+      gap: 8px;
     }
 
     .menu-button {
@@ -165,6 +221,7 @@
       padding: 5px 9px;
       font: 11px "DM Mono", monospace;
       cursor: pointer;
+      transition: .15s;
     }
 
     .terminal-toggle:hover,
@@ -181,6 +238,7 @@
       min-height: 0;
       display: flex;
       flex: 1;
+      position: relative;
     }
 
     .activity-bar {
@@ -190,6 +248,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      z-index: 12;
     }
 
     .tool {
@@ -199,9 +258,10 @@
       border-left: 2px solid transparent;
       background: transparent;
       color: #858894;
-      font-size: 22px;
+      font-size: 20px;
       cursor: pointer;
       transition: .2s;
+      position: relative;
     }
 
     .tool:hover {
@@ -211,7 +271,20 @@
 
     .tool.active {
       color: #e8e9ed;
-      border-left-color: #e8e9ed;
+      border-left-color: var(--pink);
+      background: #ffffff08;
+    }
+
+    .tool-badge {
+      position: absolute;
+      right: 7px;
+      bottom: 8px;
+      background: var(--pink);
+      color: #111;
+      font: 700 9px "DM Mono", monospace;
+      border-radius: 8px;
+      padding: 1px 4px;
+      line-height: 1.1;
     }
 
     .tool-spacer {
@@ -219,13 +292,20 @@
     }
 
     .explorer {
-      width: 224px;
-      background: #17181d;
+      width: 256px;
+      background: var(--panel);
       border-right: 1px solid var(--line);
       display: flex;
       flex-direction: column;
       font-family: "DM Mono", monospace;
       font-size: 12px;
+      transition: width .2s ease;
+      overflow: hidden;
+    }
+
+    .explorer.collapsed {
+      width: 0;
+      border-right: 0;
     }
 
     .explorer-heading {
@@ -236,14 +316,38 @@
       padding: 0 12px;
       color: #c4c5cb;
       font-size: 11px;
+      border-bottom: 1px solid #22242c;
     }
 
     .explorer-heading button {
+      border: 0;
+      background: none;
+      color: #9fa2ad;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .explorer-heading button:hover {
+      color: #fff;
+      background: #ffffff10;
+    }
+
+    .sidebar-pane {
       display: none;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-pane.active {
+      display: flex;
     }
 
     .project-root {
-      padding: 5px 12px;
+      padding: 8px 12px 5px;
       font-weight: 500;
       color: #d9d9de;
       font-size: 11px;
@@ -251,12 +355,14 @@
 
     .chev {
       color: #aaa;
-      font-size: 16px;
+      font-size: 14px;
       vertical-align: -1px;
+      display: inline-block;
+      transition: transform .15s;
     }
 
     .tree-item {
-      height: 29px;
+      height: 30px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -287,12 +393,190 @@
     .explorer-bottom {
       margin-top: auto;
       border-top: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 11px;
-      padding: 13px 12px;
+      font-size: 11px;
+    }
+
+    .accordion-btn {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #22242c;
+      background: transparent;
       color: #9698a2;
+      font: 10px "DM Mono", monospace;
+      padding: 9px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .accordion-btn:hover {
+      color: #e2e3e9;
+      background: #ffffff06;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 6px 12px 10px;
+      background: #14151a;
+      border-bottom: 1px solid #22242c;
+    }
+
+    .accordion-content.open {
+      display: block;
+    }
+
+    .outline-link {
+      display: block;
+      color: #9da0ab;
+      text-decoration: none;
+      padding: 4px 6px;
+      font-size: 11px;
+      border-radius: 3px;
+    }
+
+    .outline-link:hover {
+      color: #fff;
+      background: #ffffff0a;
+    }
+
+    .timeline-entry {
+      padding: 4px 0;
+      color: #9da0ab;
       font-size: 10px;
+      line-height: 1.4;
+      border-left: 1px solid #353844;
+      padding-left: 8px;
+      margin-left: 4px;
+      margin-bottom: 5px;
+    }
+
+    .timeline-entry strong {
+      color: var(--blue);
+      display: block;
+      font-weight: 500;
+    }
+
+    /* Sidebar Panes: Search, Git, Extensions, Settings */
+    .pane-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-input {
+      width: 100%;
+      background: #121318;
+      border: 1px solid #343744;
+      color: #e4e5eb;
+      padding: 7px 9px;
+      border-radius: 4px;
+      font: 11px "DM Mono", monospace;
+      outline: none;
+    }
+
+    .sidebar-input:focus {
+      border-color: var(--blue);
+    }
+
+    .search-results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .search-hit {
+      border: 1px solid #2a2c36;
+      background: #14151a;
+      border-radius: 5px;
+      padding: 8px;
+      color: #cfd1da;
+      text-align: left;
+      font: 11px/1.45 "DM Mono", monospace;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .search-hit:hover {
+      border-color: var(--blue);
+      background: #1b1d25;
+    }
+
+    .search-hit small {
+      display: block;
+      color: var(--pink);
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    .git-card,
+    .ext-card,
+    .setting-row {
+      border: 1px solid #2a2c36;
+      background: #14151a;
+      border-radius: 5px;
+      padding: 9px 10px;
+      font: 11px/1.5 "DM Mono", monospace;
+      color: #c8cad3;
+    }
+
+    .git-commit {
+      border-left: 2px solid var(--purple);
+      padding-left: 8px;
+      margin-top: 6px;
+    }
+
+    .git-hash {
+      color: var(--yellow);
+      font-size: 10px;
+    }
+
+    .ext-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ext-card strong {
+      display: block;
+      color: #e6e7ee;
+      font-size: 11px;
+    }
+
+    .ext-card span {
+      color: #878a96;
+      font-size: 10px;
+    }
+
+    .mini-btn {
+      border: 1px solid #3b3e4c;
+      background: #23252f;
+      color: #d6d8e1;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font: 10px "DM Mono", monospace;
+      cursor: pointer;
+    }
+
+    .mini-btn:hover,
+    .mini-btn.active {
+      border-color: var(--pink);
+      color: #fff;
+      background: #2f293c;
+    }
+
+    .theme-select {
+      width: 100%;
+      background: #121318;
+      border: 1px solid #353846;
+      color: #e5e6ec;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font: 11px "DM Mono", monospace;
+      margin-top: 6px;
     }
 
     /* ==========================================================================
@@ -303,7 +587,7 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      background: linear-gradient(90deg, #131419 0%, #14151a 100%);
+      background: var(--editor-bg);
     }
 
     .tabs {
@@ -312,7 +596,8 @@
       display: flex;
       background: #15161b;
       border-bottom: 1px solid #262830;
-      overflow: hidden;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
 
     .tab {
@@ -323,17 +608,18 @@
       font-family: "DM Mono", monospace;
       font-size: 11px;
       padding: 0 13px;
-      min-width: 145px;
+      min-width: 140px;
       display: flex;
       align-items: center;
       gap: 7px;
       cursor: pointer;
+      flex-shrink: 0;
     }
 
     .tab.active {
       background: #15161a;
       color: #e4e4e6;
-      border-top: 1px solid var(--pink);
+      border-top: 2px solid var(--pink);
     }
 
     .tab.hidden {
@@ -345,24 +631,39 @@
       font-weight: 400;
       margin-left: auto;
       color: #777;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    .tab b:hover {
+      color: #fff;
+      background: #ffffff18;
     }
 
     .breadcrumbs {
       height: 32px;
       flex: 0 0 32px;
-      padding: 9px 19px;
+      padding: 0 19px;
       color: #747782;
       font: 11px "DM Mono", monospace;
       border-bottom: 1px solid #202229;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .breadcrumbs span {
+    .breadcrumbs-path span {
       margin: 0 5px;
     }
 
     .breadcrumbs strong {
       color: #b6b8c1;
       font-weight: 400;
+    }
+
+    .breadcrumbs-actions {
+      display: flex;
+      gap: 6px;
     }
 
     .editor-scroll {
@@ -396,6 +697,7 @@
       color: #343640;
       font: 11px/24px "DM Mono", monospace;
       text-align: right;
+      user-select: none;
     }
 
     .hero-content {
@@ -435,7 +737,7 @@
     }
 
     .gradient-text {
-      background: linear-gradient(100deg, #f6a6ce 0%, #c1a2ff 44%, #77ccff 100%);
+      background: linear-gradient(100deg, var(--pink) 0%, var(--purple) 44%, var(--blue) 100%);
       color: transparent;
       -webkit-background-clip: text;
       background-clip: text;
@@ -454,6 +756,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
+      flex-wrap: wrap;
     }
 
     .button {
@@ -463,9 +766,11 @@
       text-decoration: none;
       padding: 12px 15px;
       display: inline-flex;
-      gap: 16px;
+      gap: 12px;
       align-items: center;
       transition: .2s;
+      cursor: pointer;
+      border: 1px solid transparent;
     }
 
     .button.primary {
@@ -481,6 +786,7 @@
 
     .button.ghost {
       border: 1px solid #393b44;
+      background: transparent;
       color: #c9cbd3;
     }
 
@@ -545,7 +851,7 @@
       position: absolute;
       right: 4%;
       top: 88px;
-      width: 300px;
+      width: 310px;
       padding: 20px 21px;
       background: #191a20db;
       border: 1px solid #ffffff1d;
@@ -562,6 +868,7 @@
       display: flex;
       gap: 5px;
       margin-bottom: 10px;
+      align-items: center;
     }
 
     .card-dots i {
@@ -612,7 +919,7 @@
     }
 
     .section-heading {
-      margin-bottom: 29px;
+      margin-bottom: 24px;
     }
 
     .section-heading .code-comment {
@@ -632,6 +939,8 @@
       display: flex;
       justify-content: space-between;
       align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     .file-count {
@@ -649,13 +958,20 @@
     .skill-card,
     .project-card {
       border: 1px solid #2c2e37;
-      background: linear-gradient(145deg, #1b1d23, #17181d);
+      background: var(--card-bg);
       border-radius: 7px;
       transition: .25s;
     }
 
     .skill-card {
       padding: 20px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .skill-card.active-skill {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 1px var(--pink);
     }
 
     .skill-card:hover,
@@ -665,15 +981,26 @@
       box-shadow: 0 15px 35px #0002;
     }
 
+    .skill-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
     .skill-icon {
       height: 31px;
       width: 31px;
       border-radius: 6px;
       display: grid;
       place-items: center;
-      margin-bottom: 16px;
       font: bold 15px "DM Mono", monospace;
       background: #ffffff0c;
+    }
+
+    .skill-pct {
+      font: 11px "DM Mono", monospace;
+      color: #8e919c;
     }
 
     .pink { color: var(--pink); }
@@ -690,7 +1017,7 @@
     .skill-card p {
       font: 11px/1.6 "DM Mono", monospace;
       color: #8e919c;
-      height: 36px;
+      min-height: 36px;
       margin-bottom: 16px;
     }
 
@@ -706,6 +1033,55 @@
       display: block;
       background: linear-gradient(90deg, var(--pink), var(--purple));
       border-radius: 2px;
+    }
+
+    /* Project Toolbar & Filters */
+    .project-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chips {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      border: 1px solid #323540;
+      background: #181a20;
+      color: #a5a8b4;
+      font: 11px "DM Mono", monospace;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .filter-chip:hover,
+    .filter-chip.active {
+      color: #fff;
+      border-color: var(--pink);
+      background: #262030;
+    }
+
+    .project-search {
+      background: #16181f;
+      border: 1px solid #323540;
+      color: #e4e5eb;
+      font: 11px "DM Mono", monospace;
+      padding: 6px 11px;
+      border-radius: 4px;
+      min-width: 210px;
+      outline: none;
+    }
+
+    .project-search:focus {
+      border-color: var(--blue);
     }
 
     /* Projects Grid */
@@ -731,7 +1107,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .folder-icon {
@@ -775,13 +1151,20 @@
       margin-top: auto;
     }
 
-    .tech span {
+    .tech button {
       font: 10px "DM Mono", monospace;
       color: #aeb0b9;
       border: 1px solid #3b3d46;
       background: #ffffff05;
-      padding: 4px 6px;
+      padding: 4px 7px;
       border-radius: 3px;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .tech button:hover {
+      border-color: var(--blue);
+      color: #fff;
     }
 
     .project-links {
@@ -790,20 +1173,38 @@
       padding-top: 14px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-links-left {
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }
 
     .project-links a,
+    .project-inspect-btn,
     .social-link {
       color: #aeb0b9;
       font: 11px "DM Mono", monospace;
       text-decoration: none;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
     }
 
     .project-links a:first-child {
       color: #b6d9ff;
     }
 
+    .project-inspect-btn {
+      color: var(--purple);
+    }
+
     .project-links a:hover,
+    .project-inspect-btn:hover,
     .social-link:hover {
       color: #fff;
     }
@@ -861,6 +1262,13 @@
       background: linear-gradient(110deg, #171821, #1a1722);
     }
 
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
     .contact-code {
       font: 12px/1.8 "DM Mono", monospace;
       margin-bottom: 22px;
@@ -888,12 +1296,179 @@
       margin-bottom: 13px;
     }
 
-    .contact-section > p {
+    .contact-copy {
       font-size: 15px;
       line-height: 1.7;
       color: #9ea0aa;
-      max-width: 610px;
+      max-width: 540px;
       margin-bottom: 28px;
+    }
+
+    .contact-form-card {
+      border: 1px solid #2e313d;
+      background: #14151cd9;
+      border-radius: 8px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-form-card h3 {
+      font: 500 13px "DM Mono", monospace;
+      color: var(--blue);
+      margin: 0 0 4px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font: 11px "DM Mono", monospace;
+      color: #9ca0ad;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: #191b23;
+      border: 1px solid #323542;
+      border-radius: 4px;
+      padding: 9px 10px;
+      color: #e6e7ee;
+      font: 12px "DM Sans", sans-serif;
+      outline: none;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--pink);
+    }
+
+    /* ==========================================================================
+       Modals & Toasts
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: #07080bb8;
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 70px 16px 24px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: min(620px, 100%);
+      background: #181920;
+      border: 1px solid #383b49;
+      border-radius: 8px;
+      box-shadow: 0 24px 70px #000b;
+      overflow: hidden;
+      font-family: "DM Mono", monospace;
+    }
+
+    .modal-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid #292c37;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #cfd1dc;
+    }
+
+    .modal-close {
+      border: 0;
+      background: transparent;
+      color: #9699a6;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 18px;
+      font-family: "DM Sans", sans-serif;
+      color: #d4d6df;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .palette-input {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid #2b2e3a;
+      background: #13141a;
+      color: #eff0f5;
+      padding: 13px 16px;
+      font: 13px "DM Mono", monospace;
+      outline: none;
+    }
+
+    .palette-list {
+      max-height: 310px;
+      overflow-y: auto;
+      padding: 6px;
+    }
+
+    .palette-item {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #c9cbd4;
+      padding: 9px 12px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: 12px "DM Mono", monospace;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .palette-item:hover,
+    .palette-item.selected {
+      background: #272936;
+      color: #fff;
+    }
+
+    .palette-item small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 34px;
+      background: #1e2029;
+      border: 1px solid var(--green);
+      color: #eef0f6;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font: 11px "DM Mono", monospace;
+      box-shadow: 0 12px 30px #0008;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .2s;
+      z-index: 60;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ==========================================================================
@@ -911,10 +1486,10 @@
     }
 
     .statusbar {
-      height: 23px;
-      flex: 0 0 23px;
-      background: #8269c3;
-      color: #f4f2ff;
+      height: 24px;
+      flex: 0 0 24px;
+      background: var(--status-bg);
+      color: var(--status-text);
       padding: 0 12px;
       display: flex;
       align-items: center;
@@ -926,17 +1501,33 @@
       font-weight: 400;
     }
 
+    .status-left,
     .status-right {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .status-btn {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+
+    .status-btn:hover {
+      background: #ffffff1a;
     }
 
     /* ==========================================================================
        Terminal Panel
        ========================================================================== */
     .terminal-panel {
-      height: 220px;
-      flex: 0 0 220px;
+      height: 230px;
+      flex: 0 0 230px;
       background: #101115;
       border-top: 1px solid #343640;
       display: none;
@@ -957,6 +1548,29 @@
       color: #aaadb8;
       font-size: 11px;
       border-bottom: 1px solid #292b33;
+      gap: 10px;
+    }
+
+    .terminal-quick {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .term-chip {
+      border: 1px solid #2f323d;
+      background: #181a20;
+      color: #9ea2b0;
+      border-radius: 3px;
+      padding: 2px 7px;
+      font: 10px "DM Mono", monospace;
+      cursor: pointer;
+    }
+
+    .term-chip:hover {
+      color: #fff;
+      border-color: var(--green);
     }
 
     .terminal-dot {
@@ -969,7 +1583,7 @@
       box-shadow: 0 0 8px #8fdc8a;
     }
 
-    .terminal-head button {
+    .terminal-head-close {
       border: 0;
       background: transparent;
       color: #a7aab5;
@@ -977,7 +1591,7 @@
       cursor: pointer;
     }
 
-    .terminal-head button:hover {
+    .terminal-head-close:hover {
       color: #fff;
     }
 
@@ -1012,6 +1626,7 @@
       padding: 8px 13px;
       border-top: 1px solid #24262c;
       color: #8fdc8a;
+      align-items: center;
     }
 
     .terminal-form input {
@@ -1029,7 +1644,7 @@
       background: #343641;
       color: #d8dae2;
       border-radius: 3px;
-      padding: 2px 8px;
+      padding: 3px 9px;
       font: 11px "DM Mono", monospace;
       cursor: pointer;
     }
@@ -1041,11 +1656,9 @@
     /* ==========================================================================
        Responsive Breakpoints
        ========================================================================== */
-    @media (max-width: 800px) {
+    @media (max-width: 860px) {
       .titlebar-center,
-      .window-controls,
-      .activity-bar,
-      .top-nav {
+      .activity-bar {
         display: none;
       }
       .titlebar {
@@ -1063,27 +1676,22 @@
         background: transparent;
         color: #ddd;
         font-size: 20px;
-        padding: 0 12px 0 0;
+        padding: 0 8px 0 0;
+        cursor: pointer;
       }
       .explorer {
         position: fixed;
-        z-index: 10;
+        z-index: 20;
         top: 42px;
-        bottom: 23px;
+        bottom: 24px;
         left: 0;
+        width: 260px !important;
         transform: translateX(-100%);
         transition: transform .25s;
         box-shadow: 12px 0 30px #0008;
       }
       .explorer.open {
         transform: translateX(0);
-      }
-      .explorer-heading button {
-        display: block;
-        border: 0;
-        background: none;
-        color: #ddd;
-        font-size: 22px;
       }
       .hero {
         grid-template-columns: 1fr;
@@ -1102,7 +1710,8 @@
         grid-template-columns: repeat(2, 1fr);
       }
       .project-grid,
-      .journey-grid {
+      .journey-grid,
+      .contact-layout {
         grid-template-columns: 1fr;
       }
       .json-card {
@@ -1111,11 +1720,8 @@
       .tabs .tab {
         min-width: auto;
       }
-      .tabs .tab:not(.active) {
-        display: none;
-      }
       .breadcrumbs {
-        padding-left: 30px;
+        padding-left: 20px;
       }
       footer {
         padding: 0 30px;
@@ -1129,11 +1735,12 @@
       }
     }
 
-    @media (max-width: 430px) {
+    @media (max-width: 480px) {
       h1 {
-        font-size: 40px;
+        font-size: 38px;
       }
-      .skill-grid {
+      .skill-grid,
+      .form-row {
         grid-template-columns: 1fr;
       }
       .hero-actions {
@@ -1153,10 +1760,10 @@
         padding: 0 8px;
       }
       .contact-actions {
-        gap: 18px;
+        gap: 12px;
       }
       .contact-section h2 {
-        font-size: 34px;
+        font-size: 32px;
       }
     }
   </style>
@@ -1167,44 +1774,172 @@
     <header class="titlebar" aria-label="Application toolbar">
       <button class="menu-button" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="brand"><span class="brand-mark">&lt;/&gt;</span><span>developer<span class="muted">.portfolio</span></span></div>
+      <div class="titlebar-center">
+        <button class="command-trigger" id="commandPaletteBtn" type="button" aria-label="Open command palette">
+          <span>⌕ Search files, projects, or run command...</span>
+          <kbd>Ctrl+K</kbd>
+        </button>
+      </div>
       <div class="titlebar-spacer"></div>
-      <button class="terminal-toggle" id="terminalToggle" aria-expanded="false" aria-controls="terminalPanel">▸_ Terminal</button>
+      <div class="titlebar-actions">
+        <button class="terminal-toggle" id="mobilePaletteBtn" type="button" aria-label="Quick command palette">⌘K</button>
+        <button class="terminal-toggle" id="terminalToggle" type="button" aria-expanded="false" aria-controls="terminalPanel">▸_ Terminal</button>
+      </div>
     </header>
 
     <div class="workspace">
       <aside class="activity-bar" aria-label="Workspace tools">
-        <button class="tool active" aria-label="Explorer">▱</button>
-        <button class="tool" aria-label="Search">⌕</button>
-        <button class="tool" aria-label="Source control">⑂</button>
-        <button class="tool" aria-label="Extensions">▦</button>
-        <span class="tool-spacer"></span><button class="tool" aria-label="Settings">⚙</button>
+        <button class="tool active" type="button" data-pane="files" aria-label="Explorer" title="Explorer (Files)">▱</button>
+        <button class="tool" type="button" data-pane="search" aria-label="Search" title="Search Workspace">⌕</button>
+        <button class="tool" type="button" data-pane="git" aria-label="Source control" title="Source Control (Git)">⑂</button>
+        <button class="tool" type="button" data-pane="extensions" aria-label="Extensions" title="Stack &amp; Extensions">▦</button>
+        <span class="tool-spacer"></span>
+        <button class="tool" type="button" data-pane="settings" aria-label="Settings" title="Workspace Settings">⚙</button>
       </aside>
 
       <aside class="explorer" id="explorer" aria-label="Portfolio navigation">
-        <div class="explorer-heading"><span>EXPLORER</span><button id="closeMenu" aria-label="Close navigation">×</button></div>
-        <div class="project-root"><span class="chev">⌄</span> PORTFOLIO</div>
-        <nav>
-          <a class="tree-item current" href="#about" data-tab="about.md"><span class="file-icon md">M↓</span>about.md</a>
-          <a class="tree-item" href="#skills" data-tab="stack.ts"><span class="file-icon ts">TS</span>stack.ts</a>
-          <a class="tree-item" href="#projects" data-tab="projects.tsx"><span class="file-icon react">⚛</span>projects.tsx</a>
-          <a class="tree-item" href="#experience" data-tab="journey.json"><span class="file-icon json">{ }</span>journey.json</a>
-          <a class="tree-item" href="#contact" data-tab="contact.sh"><span class="file-icon shell">$_</span>contact.sh</a>
-        </nav>
-        <div class="explorer-bottom">
-          <span>OUTLINE</span><span>⌄</span>
-          <span>TIMELINE</span><span>⌄</span>
+        <div class="explorer-heading">
+          <span id="sidebarTitle">EXPLORER</span>
+          <button id="closeMenu" type="button" aria-label="Close navigation">×</button>
+        </div>
+
+        <!-- Pane 1: Explorer Files -->
+        <div class="sidebar-pane active" id="pane-files">
+          <div class="project-root"><span class="chev">⌄</span> PORTFOLIO</div>
+          <nav aria-label="Workspace files">
+            <a class="tree-item current" href="#about" data-tab="about.md"><span class="file-icon md">M↓</span>about.md</a>
+            <a class="tree-item" href="#skills" data-tab="stack.ts"><span class="file-icon ts">TS</span>stack.ts</a>
+            <a class="tree-item" href="#projects" data-tab="projects.tsx"><span class="file-icon react">⚛</span>projects.tsx</a>
+            <a class="tree-item" href="#experience" data-tab="journey.json"><span class="file-icon json">{ }</span>journey.json</a>
+            <a class="tree-item" href="#contact" data-tab="contact.sh"><span class="file-icon shell">$_</span>contact.sh</a>
+          </nav>
+          <div class="explorer-bottom">
+            <button class="accordion-btn" type="button" data-accordion="outlineBody" aria-expanded="true">
+              <span>OUTLINE</span><span>⌄</span>
+            </button>
+            <div class="accordion-content open" id="outlineBody">
+              <a class="outline-link" href="#about">01 · Profile &amp; Bio</a>
+              <a class="outline-link" href="#skills">02 · Technical Toolkit</a>
+              <a class="outline-link" href="#projects">03 · Featured Builds</a>
+              <a class="outline-link" href="#experience">04 · Engineering Mindset</a>
+              <a class="outline-link" href="#contact">05 · Direct Contact</a>
+            </div>
+            <button class="accordion-btn" type="button" data-accordion="timelineBody" aria-expanded="false">
+              <span>TIMELINE</span><span>⌄</span>
+            </button>
+            <div class="accordion-content" id="timelineBody">
+              <div class="timeline-entry"><strong>Synaptiq AI</strong>PDF-to-learning path engine</div>
+              <div class="timeline-entry"><strong>DeployCode</strong>Docker + Nginx CI/CD workflow</div>
+              <div class="timeline-entry"><strong>Realtime Chat</strong>Socket presence &amp; messaging</div>
+              <div class="timeline-entry"><strong>Water IoT</strong>Sensor telemetry dashboard</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 2: Workspace Search -->
+        <div class="sidebar-pane" id="pane-search">
+          <div class="pane-body">
+            <input class="sidebar-input" id="sidebarSearchInput" type="search" placeholder="Search skills, projects, files..." aria-label="Search workspace" />
+            <div class="search-results-list" id="sidebarSearchResults"></div>
+          </div>
+        </div>
+
+        <!-- Pane 3: Source Control (Git) -->
+        <div class="sidebar-pane" id="pane-git">
+          <div class="pane-body">
+            <div class="git-card">
+              <strong>Branch: main</strong>
+              <p style="margin:4px 0 8px;color:#8e919c;">Remote: github.com/Dev-Saurabh-K</p>
+              <button class="mini-btn" id="openGithubBtn" type="button">Open GitHub Profile ↗</button>
+            </div>
+            <div class="git-card">
+              <strong>Recent Commits</strong>
+              <div class="git-commit">
+                <span class="git-hash">feat(ui)</span> · Interactive IDE workspace, search, filters &amp; terminal
+              </div>
+              <div class="git-commit">
+                <span class="git-hash">f3db660</span> · Consolidate portfolio config in window.PORTFOLIO_ENV
+              </div>
+              <div class="git-commit">
+                <span class="git-hash">ship(ai)</span> · Add Synaptiq &amp; DeployCode production links
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 4: Extensions & Workspace Add-ons -->
+        <div class="sidebar-pane" id="pane-extensions">
+          <div class="pane-body">
+            <div class="ext-card">
+              <div>
+                <strong>Prettier Code</strong>
+                <span>Auto-formatted layout</span>
+              </div>
+              <span class="green">Active</span>
+            </div>
+            <div class="ext-card">
+              <div>
+                <strong>Docker &amp; FastAPI</strong>
+                <span>Backend container stack</span>
+              </div>
+              <span class="blue">v2.4</span>
+            </div>
+            <div class="ext-card">
+              <div>
+                <strong>Line Numbers</strong>
+                <span>Toggle editor gutter</span>
+              </div>
+              <button class="mini-btn active" id="toggleLinesBtn" type="button">On</button>
+            </div>
+            <div class="ext-card">
+              <div>
+                <strong>Compact Density</strong>
+                <span>Tighter section spacing</span>
+              </div>
+              <button class="mini-btn" id="toggleCompactBtn" type="button">Off</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pane 5: Settings & Theme -->
+        <div class="sidebar-pane" id="pane-settings">
+          <div class="pane-body">
+            <div class="setting-row">
+              <label for="themeSelect"><strong>Color Theme</strong></label>
+              <select class="theme-select" id="themeSelect" aria-label="Select color theme">
+                <option value="dark">VS Code Dark+ (Default)</option>
+                <option value="tokyo">Tokyo Night Storm</option>
+                <option value="catppuccin">Catppuccin Mocha</option>
+                <option value="emerald">Emerald Matrix</option>
+              </select>
+            </div>
+            <div class="setting-row">
+              <strong>Quick Actions</strong>
+              <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+                <button class="mini-btn" id="resetTabsBtn" type="button">Restore All Editor Tabs</button>
+                <button class="mini-btn" id="exportConfigBtn" type="button">Copy PORTFOLIO_ENV JSON</button>
+              </div>
+            </div>
+          </div>
         </div>
       </aside>
 
       <main class="editor-area" id="editor">
         <div class="tabs" role="tablist" aria-label="Open files">
-          <button class="tab active" role="tab" aria-selected="true" data-target="about" data-file="about.md"><span class="file-icon md">M↓</span>about.md <b class="tab-close" data-close aria-label="Close about.md">×</b></button>
-          <button class="tab" role="tab" aria-selected="false" data-target="projects" data-file="projects.tsx"><span class="file-icon ts">TS</span>projects.tsx <b class="tab-close" data-close aria-label="Close projects.tsx">×</b></button>
-          <button class="tab" role="tab" aria-selected="false" data-target="contact" data-file="contact.sh"><span class="file-icon shell">$_</span>contact.sh <b class="tab-close" data-close aria-label="Close contact.sh">×</b></button>
+          <button class="tab active" type="button" role="tab" aria-selected="true" data-target="about" data-file="about.md"><span class="file-icon md">M↓</span>about.md <b class="tab-close" data-close aria-label="Close about.md">×</b></button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-target="skills" data-file="stack.ts"><span class="file-icon ts">TS</span>stack.ts <b class="tab-close" data-close aria-label="Close stack.ts">×</b></button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-target="projects" data-file="projects.tsx"><span class="file-icon ts">TS</span>projects.tsx <b class="tab-close" data-close aria-label="Close projects.tsx">×</b></button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-target="experience" data-file="journey.json"><span class="file-icon json">{ }</span>journey.json <b class="tab-close" data-close aria-label="Close journey.json">×</b></button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-target="contact" data-file="contact.sh"><span class="file-icon shell">$_</span>contact.sh <b class="tab-close" data-close aria-label="Close contact.sh">×</b></button>
         </div>
-        <div class="breadcrumbs">portfolio <span>›</span> <strong>about.md</strong></div>
+        <div class="breadcrumbs">
+          <div class="breadcrumbs-path">portfolio <span>›</span> <strong id="breadcrumbFile">about.md</strong></div>
+          <div class="breadcrumbs-actions">
+            <button class="mini-btn" id="copyEmailTopBtn" type="button" title="Copy email address">Copy Email</button>
+          </div>
+        </div>
 
-        <div class="editor-scroll">
+        <div class="editor-scroll" id="editorScroller">
           <section class="hero section" id="about">
             <div class="line-numbers" aria-hidden="true">01<br>02<br>03<br>04<br>05<br>06<br>07<br>08<br>09<br>10</div>
             <div class="hero-content">
@@ -1215,6 +1950,7 @@
               <div class="hero-actions">
                 <a class="button primary" href="#projects">view_projects(); <span>→</span></a>
                 <a class="button ghost" href="#contact">get_in_touch()</a>
+                <button class="button ghost" id="heroTerminalBtn" type="button">run_terminal() <span>▸_</span></button>
               </div>
               <div class="availability"><span class="pulse"></span> <span id="profileAvailability">Open to building meaningful things</span></div>
             </div>
@@ -1231,38 +1967,152 @@
 
           <section class="section content-section" id="skills">
             <div class="section-label"><span>02</span> <strong>stack.ts</strong></div>
-            <div class="section-heading"><p class="code-comment">// the tools I reach for to turn ideas into shipping products.</p><h2>Technical toolkit</h2></div>
+            <div class="section-heading row">
+              <div>
+                <p class="code-comment">// click a domain card to highlight related projects below.</p>
+                <h2>Technical toolkit</h2>
+              </div>
+              <span class="file-count" id="skillHint">Click any stack card to filter projects</span>
+            </div>
             <div class="skill-grid" id="skillsGrid"></div>
           </section>
 
           <section class="section content-section" id="projects">
             <div class="section-label"><span>03</span> <strong>projects.tsx</strong></div>
-            <div class="section-heading row"><div><p class="code-comment">// selected builds, experiments, and things I've learned from shipping.</p><h2>Featured projects</h2></div><span class="file-count" id="projectCount">05 files</span></div>
+            <div class="section-heading row">
+              <div>
+                <p class="code-comment">// selected builds, experiments, and things I've learned from shipping.</p>
+                <h2>Featured projects</h2>
+              </div>
+              <span class="file-count" id="projectCount">04 files</span>
+            </div>
+            <div class="project-toolbar">
+              <div class="filter-chips" id="projectFilters" role="group" aria-label="Filter projects by tag"></div>
+              <input class="project-search" id="projectSearchInput" type="search" placeholder="Filter by keyword or stack..." aria-label="Search projects" />
+            </div>
             <div class="project-grid" id="projectsGrid"></div>
           </section>
 
           <section class="section content-section journey" id="experience">
             <div class="section-label"><span>04</span> <strong>journey.json</strong></div>
             <div class="section-heading"><p class="code-comment">// always learning in public, one well-placed semicolon at a time.</p><h2>How I work</h2></div>
-            <div class="journey-grid"><div class="json-card"><span class="key">"mindset"</span>: <span class="string">"learn deeply, ship thoughtfully"</span>,<br><span class="key">"focus"</span>: [<span class="string">"full-stack products"</span>, <span class="string">"AI workflows"</span>, <span class="string">"deployment"</span>],<br><span class="key">"currently"</span>: <span class="string">"turning ideas into useful software"</span></div><div class="work-note"><h3>From prototype to production</h3><p>I enjoy owning the connective tissue: translating a problem into a clear interface, shaping the API behind it, and making sure it can be confidently deployed.</p><p class="small-accent">Curious by default. Detail-oriented by choice.</p></div></div>
+            <div class="journey-grid">
+              <div class="json-card">
+                <span class="key">"mindset"</span>: <span class="string">"learn deeply, ship thoughtfully"</span>,<br>
+                <span class="key">"focus"</span>: [<span class="string">"full-stack products"</span>, <span class="string">"AI workflows"</span>, <span class="string">"deployment"</span>],<br>
+                <span class="key">"currently"</span>: <span class="string">"turning ideas into useful software"</span>
+              </div>
+              <div class="work-note">
+                <h3>From prototype to production</h3>
+                <p>I enjoy owning the connective tissue: translating a problem into a clear interface, shaping the API behind it, and making sure it can be confidently deployed.</p>
+                <p class="small-accent">Curious by default. Detail-oriented by choice.</p>
+              </div>
+            </div>
           </section>
 
           <section class="section contact-section" id="contact">
-            <div class="contact-code"><span class="code-comment"># Ready when you are</span><br><span class="green">$</span> <span class="command">let's build something useful</span><span class="cursor"></span></div>
-            <h2>Have a project in mind?</h2><p>Whether it starts as a rough idea or a demanding technical challenge, I’d love to hear what you’re working on.</p>
-            <div class="contact-actions"><a class="button primary" id="emailLink" href="mailto:hello@example.com">send_message() <span>↗</span></a><a class="social-link" id="githubLink" href="https://github.com/" target="_blank" rel="noreferrer">GitHub <span>↗</span></a></div>
+            <div class="contact-layout">
+              <div>
+                <div class="contact-code"><span class="code-comment"># Ready when you are</span><br><span class="green">$</span> <span class="command">let's build something useful</span><span class="cursor"></span></div>
+                <h2>Have a project in mind?</h2>
+                <p class="contact-copy">Whether it starts as a rough idea or a demanding technical challenge, I’d love to hear what you’re working on.</p>
+                <div class="contact-actions">
+                  <a class="button primary" id="emailLink" href="mailto:saurabhkumar.sakr@gmail.com">send_message() <span>↗</span></a>
+                  <button class="button ghost" id="copyEmailBtn" type="button">copy_email()</button>
+                  <a class="social-link" id="githubLink" href="https://github.com/Dev-Saurabh-K" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+                </div>
+              </div>
+              <form class="contact-form-card" id="contactForm">
+                <h3>// quick_message.sh</h3>
+                <div class="form-row">
+                  <label class="form-field">
+                    <span>NAME</span>
+                    <input type="text" id="senderName" name="name" required placeholder="Your name" />
+                  </label>
+                  <label class="form-field">
+                    <span>EMAIL</span>
+                    <input type="email" id="senderEmail" name="email" required placeholder="you@example.com" />
+                  </label>
+                </div>
+                <label class="form-field">
+                  <span>SUBJECT / SCOPE</span>
+                  <input type="text" id="senderSubject" name="subject" required placeholder="Backend API, DevOps pipeline, or full-stack build" />
+                </label>
+                <label class="form-field">
+                  <span>MESSAGE</span>
+                  <textarea id="senderMessage" name="message" rows="3" required placeholder="Tell me about your timeline, stack, or problem to solve..."></textarea>
+                </label>
+                <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+                  <button class="button primary" type="submit" style="padding:9px 14px;">execute_send() <span>↵</span></button>
+                  <button class="mini-btn" id="copyDraftBtn" type="button">Copy Formatted Draft</button>
+                </div>
+              </form>
+            </div>
           </section>
-          <footer><span>© 2026 · built with curiosity</span><span>Ln 42, Col 1 &nbsp; Spaces: 2 &nbsp; UTF-8</span></footer>
+          <footer><span>© 2026 · built with curiosity</span><span id="cursorStatus">Ln 1, Col 1 &nbsp; Spaces: 2 &nbsp; UTF-8</span></footer>
         </div>
+
         <section class="terminal-panel" id="terminalPanel" aria-label="Portfolio terminal" aria-hidden="true">
-          <div class="terminal-head"><span><i class="terminal-dot"></i>TERMINAL</span><button id="terminalClose" aria-label="Close terminal">×</button></div>
-          <div class="terminal-output" id="terminalOutput" aria-live="polite"><p>Portfolio terminal — type <span>help</span> for available commands.</p></div>
-          <form class="terminal-form" id="terminalForm"><label for="terminalInput">visitor@portfolio:~$</label><input id="terminalInput" autocomplete="off" spellcheck="false" aria-label="Terminal command" /><button type="submit">Run</button></form>
+          <div class="terminal-head">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span><i class="terminal-dot"></i>TERMINAL</span>
+              <div class="terminal-quick" aria-label="Quick terminal commands">
+                <button class="term-chip" type="button" data-cmd="help">help</button>
+                <button class="term-chip" type="button" data-cmd="whoami">whoami</button>
+                <button class="term-chip" type="button" data-cmd="projects">projects</button>
+                <button class="term-chip" type="button" data-cmd="skills">skills</button>
+                <button class="term-chip" type="button" data-cmd="git log">git log</button>
+                <button class="term-chip" type="button" data-cmd="clear">clear</button>
+              </div>
+            </div>
+            <button class="terminal-head-close" id="terminalClose" type="button" aria-label="Close terminal">×</button>
+          </div>
+          <div class="terminal-output" id="terminalOutput" aria-live="polite">
+            <p>Portfolio terminal — type <span>help</span> for available commands or click a quick chip above.</p>
+          </div>
+          <form class="terminal-form" id="terminalForm">
+            <label for="terminalInput">visitor@portfolio:~$</label>
+            <input id="terminalInput" autocomplete="off" spellcheck="false" aria-label="Terminal command" placeholder="try: help, whoami, ls, cat stack.ts, open synaptiq..." />
+            <button type="submit">Run</button>
+          </form>
         </section>
       </main>
     </div>
-    <div class="statusbar"><span><b>⑂ main</b><span class="hide-mobile"> ⟳ 0 &nbsp; × 0</span></span><span class="status-right"><span class="hide-mobile">◔ Prettier &nbsp; </span>JavaScript&nbsp; ◖</span></div>
+
+    <div class="statusbar">
+      <div class="status-left">
+        <button class="status-btn" id="statusGitBtn" type="button"><b>⑂ main</b></button>
+        <span class="hide-mobile">⟳ 0 &nbsp; × 0</span>
+      </div>
+      <div class="status-right">
+        <button class="status-btn" id="statusThemeBtn" type="button">◑ Theme: Dark+</button>
+        <span class="hide-mobile">◔ Prettier</span>
+        <span id="statusLang">Markdown</span>
+      </div>
+    </div>
   </div>
+
+  <!-- Command Palette Modal -->
+  <div class="modal-backdrop" id="paletteModal" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="modal-card">
+      <input class="palette-input" id="paletteInput" type="search" placeholder="Type a command or search sections (e.g., Projects, Theme, Copy Email, Terminal)..." autocomplete="off" />
+      <div class="palette-list" id="paletteList"></div>
+    </div>
+  </div>
+
+  <!-- Project Case Study / Inspector Modal -->
+  <div class="modal-backdrop" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span id="projectModalTitle">PROJECT INSPECTOR</span>
+        <button class="modal-close" id="projectModalClose" type="button" aria-label="Close modal">×</button>
+      </div>
+      <div class="modal-body" id="projectModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     /* ==========================================================================
@@ -1279,10 +2129,10 @@
         github: "https://github.com/Dev-Saurabh-K"
       },
       skills: [
-        { icon: "⌘", tone: "pink", title: "Frontend", items: "React · Next.js · JavaScript · TypeScript", percentage: 85 },
-        { icon: "⌁", tone: "blue", title: "Backend", items: "Node.js · Express · FastAPI · REST APIs", percentage: 88 },
-        { icon: "◈", tone: "yellow", title: "Data & AI", items: "MongoDB · AI integrations · real-time data · sql", percentage: 84 },
-        { icon: "⌘", tone: "green", title: "DevOps", items: "Docker · CI/CD · cloud deployment · Git · Nginx", percentage: 80 }
+        { icon: "⌘", tone: "pink", title: "Frontend", items: "React · Next.js · JavaScript · TypeScript", percentage: 85, filterKeywords: ["ReactJS", "MERN", "AI", "Analytics"] },
+        { icon: "⌁", tone: "blue", title: "Backend", items: "Node.js · Express · FastAPI · REST APIs", percentage: 88, filterKeywords: ["FastAPI", "REST", "Socket-based", "MERN"] },
+        { icon: "◈", tone: "yellow", title: "Data & AI", items: "MongoDB · AI integrations · real-time data · sql", percentage: 84, filterKeywords: ["AI", "PDF processing", "Analytics", "Quizzes", "Data", "IoT"] },
+        { icon: "⌘", tone: "green", title: "DevOps", items: "Docker · CI/CD · cloud deployment · Git · Nginx", percentage: 80, filterKeywords: ["Nginx", "Docker", "FastAPI", "Monitoring"] }
       ],
       projects: [
         {
@@ -1293,6 +2143,7 @@
           iconClass: "synaptiq-folder",
           cardClass: "synaptiq",
           description: "Transforms PDFs into structured, topic-by-topic learning paths with detailed notes. Explore contextual keywords for supporting visuals and information, take quizzes per topic, and track progress through a personal analytics dashboard.",
+          architecture: "Document ingestion pipeline extracts semantic sections from uploaded PDFs, generates topic summaries and interactive quizzes via LLM structured outputs, and persists user mastery metrics for real-time progress tracking.",
           tags: ["AI", "PDF processing", "Analytics", "Quizzes"],
           linkText: "View project ↗",
           url: "https://private-sigma-mauve.vercel.app",
@@ -1305,6 +2156,7 @@
           icon: "▰",
           cardClass: "featured",
           description: "A developer-focused deployment experience that brings the path from code to production into a calmer, more approachable workflow.",
+          architecture: "FastAPI orchestration service paired with isolated Docker build containers and dynamic Nginx reverse-proxy routing, giving developers instant preview URLs and zero-downtime container rollouts.",
           tags: ["Nginx", "FastAPI", "Docker", "ReactJS"],
           linkText: "Case study ↗",
           url: "https://deploycode-chi.vercel.app",
@@ -1317,6 +2169,7 @@
           icon: "▰",
           iconClass: "green-folder",
           description: "A responsive messaging experience exploring live updates, user presence, and the small details that make conversation feel immediate.",
+          architecture: "Event-driven WebSocket server over Node.js and Express with MongoDB persistence, optimistic UI state updates, typing indicators, and automatic reconnection handling.",
           tags: ["MERN", "Socket-based", "REST"],
           linkText: "View project ↗",
           url: "https://chat-app-x6sa.vercel.app",
@@ -1329,8 +2182,9 @@
           icon: "▰",
           iconClass: "orange-folder",
           description: "An IoT monitoring project that turns sensor readings into useful visibility for water quality and resource awareness.",
+          architecture: "Edge microcontroller telemetry ingestion collecting pH, turbidity, and flow-rate metrics into a time-series dashboard with threshold alerting and anomaly detection.",
           tags: ["IoT", "Data", "Monitoring"],
-          linkText: "View project ↗",
+          linkText: "Request demo ↗",
           url: "#contact",
           repo: "#contact"
         }
@@ -1341,13 +2195,13 @@
        Application Controller
        ========================================================================== */
     (function() {
+      const env = window.PORTFOLIO_ENV;
       const explorer = document.getElementById('explorer');
       const toggle = document.getElementById('menuToggle');
       const close = document.getElementById('closeMenu');
       const treeItems = document.querySelectorAll('.tree-item');
-      const env = window.PORTFOLIO_ENV;
-      const editorScroller = document.querySelector('.editor-scroll');
-      const breadcrumbs = document.querySelector('.breadcrumbs strong');
+      const editorScroller = document.getElementById('editorScroller');
+      const breadcrumbs = document.getElementById('breadcrumbFile');
       const terminalPanel = document.getElementById('terminalPanel');
       const terminalToggle = document.getElementById('terminalToggle');
       const terminalClose = document.getElementById('terminalClose');
@@ -1355,6 +2209,39 @@
       const terminalInput = document.getElementById('terminalInput');
       const terminalOutput = document.getElementById('terminalOutput');
       const tabsContainer = document.querySelector('.tabs');
+      const statusLang = document.getElementById('statusLang');
+      const cursorStatus = document.getElementById('cursorStatus');
+      const toastEl = document.getElementById('toast');
+
+      let activeTag = 'All';
+      let activeSkillTitle = null;
+      let searchQuery = '';
+      const cmdHistory = [];
+      let historyIndex = -1;
+
+      function showToast(message) {
+        if (!toastEl) return;
+        toastEl.textContent = message;
+        toastEl.classList.add('show');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+      }
+
+      function copyText(text, label) {
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => showToast(label || 'Copied to clipboard'));
+            return;
+          }
+        } catch (err) {}
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(temp);
+        showToast(label || 'Copied to clipboard');
+      }
 
       function normalizeUrl(url) {
         if (!url) return '#';
@@ -1364,8 +2251,113 @@
         return `https://${url}`;
       }
 
+      /* Render Profile, Skills, and Filterable Projects */
+      function renderSkills() {
+        const skillsGrid = document.getElementById('skillsGrid');
+        if (!skillsGrid || !env) return;
+        skillsGrid.innerHTML = env.skills.map(skill => {
+          const isActive = activeSkillTitle === skill.title;
+          return `
+            <article class="skill-card ${isActive ? 'active-skill' : ''}" data-skill="${skill.title}" role="button" tabindex="0" aria-pressed="${isActive}">
+              <div class="skill-top">
+                <div class="skill-icon ${skill.tone}">${skill.icon}</div>
+                <span class="skill-pct">${skill.percentage}%</span>
+              </div>
+              <h3>${skill.title}</h3>
+              <p>${skill.items}</p>
+              <div class="mini-bar"><i style="width:${skill.percentage}%"></i></div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      function getFilteredProjects() {
+        if (!env) return [];
+        const skillObj = activeSkillTitle ? env.skills.find(s => s.title === activeSkillTitle) : null;
+        return env.projects.filter(project => {
+          const matchesTag = activeTag === 'All' || project.tags.includes(activeTag);
+          const matchesSkill = !skillObj || project.tags.some(t => (skillObj.filterKeywords || []).includes(t));
+          const q = searchQuery.trim().toLowerCase();
+          const matchesQuery = !q ||
+            project.name.toLowerCase().includes(q) ||
+            project.description.toLowerCase().includes(q) ||
+            project.tags.some(t => t.toLowerCase().includes(q));
+          return matchesTag && matchesSkill && matchesQuery;
+        });
+      }
+
+      function renderProjectFilters() {
+        const container = document.getElementById('projectFilters');
+        if (!container || !env) return;
+        const allTags = ['All', ...new Set(env.projects.flatMap(p => p.tags))];
+        container.innerHTML = allTags.map(tag => `
+          <button class="filter-chip ${activeTag === tag ? 'active' : ''}" type="button" data-filter-tag="${tag}">${tag}</button>
+        `).join('');
+      }
+
+      function renderProjects() {
+        const projectsGrid = document.getElementById('projectsGrid');
+        const projectCount = document.getElementById('projectCount');
+        if (!projectsGrid || !env) return;
+
+        const filtered = getFilteredProjects();
+        if (projectCount) {
+          projectCount.textContent = `${String(filtered.length).padStart(2, '0')} of ${String(env.projects.length).padStart(2, '0')} files`;
+        }
+
+        if (!filtered.length) {
+          projectsGrid.innerHTML = `
+            <article class="project-card" style="grid-column: 1 / -1; min-height: 140px; align-items: flex-start; justify-content: center;">
+              <h3>No matching projects found</h3>
+              <p>Try clearing the active tag or search filter to view all ${env.projects.length} builds.</p>
+              <button class="mini-btn" type="button" id="clearFiltersBtn">Reset Filters</button>
+            </article>
+          `;
+          const clearBtn = document.getElementById('clearFiltersBtn');
+          if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+              activeTag = 'All';
+              activeSkillTitle = null;
+              searchQuery = '';
+              const input = document.getElementById('projectSearchInput');
+              if (input) input.value = '';
+              renderSkills();
+              renderProjectFilters();
+              renderProjects();
+            });
+          }
+          return;
+        }
+
+        projectsGrid.innerHTML = filtered.map(project => {
+          const linkUrl = normalizeUrl(project.url);
+          const repoUrl = normalizeUrl(project.repo);
+          const isInternalLink = linkUrl.startsWith('#');
+          const isInternalRepo = repoUrl.startsWith('#');
+
+          return `
+            <article class="project-card ${project.cardClass || ''}">
+              <div class="project-top">
+                <span class="folder-icon ${project.iconClass || ''}">${project.icon || '▰'}</span>
+                <span class="project-number">${project.number}</span>
+              </div>
+              <h3>${project.name} ${project.suffix ? `<span>${project.suffix}</span>` : ''}</h3>
+              <p>${project.description}</p>
+              <div class="tech">${project.tags.map(tag => `<button type="button" data-tag-click="${tag}">${tag}</button>`).join('')}</div>
+              <div class="project-links">
+                <div class="project-links-left">
+                  <a href="${linkUrl}" ${isInternalLink ? '' : 'target="_blank" rel="noreferrer"'}>${project.linkText}</a>
+                  <button class="project-inspect-btn" type="button" data-inspect="${project.number}">inspect() ⌕</button>
+                </div>
+                <a href="${repoUrl}" ${isInternalRepo ? '' : 'target="_blank" rel="noreferrer"'} aria-label="${project.name} repository" title="View repository">⌘ Repo</a>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
       if (env) {
-        const { profile, skills, projects } = env;
+        const { profile } = env;
         const titleEl = document.getElementById('profileTitle');
         if (titleEl) titleEl.textContent = `"${profile.title}"`;
 
@@ -1388,61 +2380,294 @@
         const githubEl = document.getElementById('githubLink');
         if (githubEl) githubEl.href = normalizeUrl(profile.github);
 
-        const skillsGrid = document.getElementById('skillsGrid');
-        if (skillsGrid) {
-          skillsGrid.innerHTML = skills.map(skill => `
-            <article class="skill-card">
-              <div class="skill-icon ${skill.tone}">${skill.icon}</div>
-              <h3>${skill.title}</h3>
-              <p>${skill.items}</p>
-              <div class="mini-bar"><i style="width:${skill.percentage}%"></i></div>
-            </article>
-          `).join('');
+        renderSkills();
+        renderProjectFilters();
+        renderProjects();
+      }
+
+      /* Skill Card Click -> Filter Projects */
+      const skillsGridEl = document.getElementById('skillsGrid');
+      if (skillsGridEl) {
+        skillsGridEl.addEventListener('click', event => {
+          const card = event.target.closest('.skill-card');
+          if (!card) return;
+          const skillTitle = card.dataset.skill;
+          activeSkillTitle = activeSkillTitle === skillTitle ? null : skillTitle;
+          const skillHint = document.getElementById('skillHint');
+          if (skillHint) {
+            skillHint.textContent = activeSkillTitle
+              ? `Filtered by ${activeSkillTitle} (click again to clear)`
+              : 'Click any stack card to filter projects';
+          }
+          renderSkills();
+          renderProjects();
+        });
+      }
+
+      /* Project Filter Chips, Tag Clicks, and Search Input */
+      const projectFiltersEl = document.getElementById('projectFilters');
+      if (projectFiltersEl) {
+        projectFiltersEl.addEventListener('click', event => {
+          const btn = event.target.closest('[data-filter-tag]');
+          if (!btn) return;
+          activeTag = btn.dataset.filterTag;
+          renderProjectFilters();
+          renderProjects();
+        });
+      }
+
+      const projectSearchInput = document.getElementById('projectSearchInput');
+      if (projectSearchInput) {
+        projectSearchInput.addEventListener('input', () => {
+          searchQuery = projectSearchInput.value;
+          renderProjects();
+        });
+      }
+
+      /* Project Modal Inspector & Tag Click Delegation */
+      const projectModal = document.getElementById('projectModal');
+      const projectModalTitle = document.getElementById('projectModalTitle');
+      const projectModalBody = document.getElementById('projectModalBody');
+      const projectModalClose = document.getElementById('projectModalClose');
+
+      function openProjectInspector(num) {
+        if (!env || !projectModal) return;
+        const proj = env.projects.find(p => p.number === num);
+        if (!proj) return;
+        const linkUrl = normalizeUrl(proj.url);
+        const repoUrl = normalizeUrl(proj.repo);
+        projectModalTitle.textContent = `${proj.number} · ${proj.name.toUpperCase()} — ARCHITECTURE & SPECS`;
+        projectModalBody.innerHTML = `
+          <h3 style="margin:0 0 8px;color:#fff;">${proj.name} <span style="color:#8f93a2;font-weight:400;">${proj.suffix || ''}</span></h3>
+          <p style="color:#aeb1bd;margin-bottom:14px;">${proj.description}</p>
+          <div style="background:#121319;border:1px solid #2b2e3b;border-radius:6px;padding:12px 14px;margin-bottom:16px;">
+            <strong style="font:11px 'DM Mono',monospace;color:var(--pink);display:block;margin-bottom:6px;">// SYSTEM ARCHITECTURE &amp; WORKFLOW</strong>
+            <p style="margin:0;font-size:13px;color:#d0d2dc;">${proj.architecture || 'Full-stack architecture designed for reliability, observability, and clean deployment.'}</p>
+          </div>
+          <div class="tech" style="margin-bottom:18px;">
+            ${proj.tags.map(t => `<button type="button">${t}</button>`).join('')}
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <a class="button primary" href="${linkUrl}" ${linkUrl.startsWith('#') ? 'data-close-modal="true"' : 'target="_blank" rel="noreferrer"'} style="padding:9px 14px;">${proj.linkText}</a>
+            <a class="button ghost" href="${repoUrl}" ${repoUrl.startsWith('#') ? 'data-close-modal="true"' : 'target="_blank" rel="noreferrer"'} style="padding:9px 14px;">Repository ⌘</a>
+          </div>
+        `;
+        projectModal.classList.add('open');
+      }
+
+      const projectsGridEl = document.getElementById('projectsGrid');
+      if (projectsGridEl) {
+        projectsGridEl.addEventListener('click', event => {
+          const tagBtn = event.target.closest('[data-tag-click]');
+          if (tagBtn) {
+            activeTag = tagBtn.dataset.tagClick;
+            renderProjectFilters();
+            renderProjects();
+            return;
+          }
+          const inspectBtn = event.target.closest('[data-inspect]');
+          if (inspectBtn) {
+            openProjectInspector(inspectBtn.dataset.inspect);
+          }
+        });
+      }
+
+      if (projectModalClose) {
+        projectModalClose.addEventListener('click', () => projectModal.classList.remove('open'));
+      }
+      if (projectModal) {
+        projectModal.addEventListener('click', event => {
+          if (event.target === projectModal || event.target.closest('[data-close-modal]')) {
+            projectModal.classList.remove('open');
+          }
+        });
+      }
+
+      /* Activity Bar & Sidebar Panes */
+      const paneTitles = {
+        files: 'EXPLORER',
+        search: 'WORKSPACE SEARCH',
+        git: 'SOURCE CONTROL',
+        extensions: 'STACK & EXTENSIONS',
+        settings: 'SETTINGS & THEME'
+      };
+
+      const activityTools = document.querySelectorAll('.activity-bar .tool');
+      const sidebarPanes = document.querySelectorAll('.sidebar-pane');
+      const sidebarTitle = document.getElementById('sidebarTitle');
+
+      function switchSidebarPane(paneName) {
+        const targetPane = document.getElementById(`pane-${paneName}`);
+        if (!targetPane) return;
+        const isAlreadyActive = targetPane.classList.contains('active') && !explorer.classList.contains('collapsed');
+        if (isAlreadyActive && window.innerWidth > 860) {
+          explorer.classList.add('collapsed');
+          activityTools.forEach(btn => btn.classList.remove('active'));
+          return;
         }
-
-        const projectCount = document.getElementById('projectCount');
-        if (projectCount) projectCount.textContent = `${String(projects.length).padStart(2, '0')} files`;
-
-        const projectsGrid = document.getElementById('projectsGrid');
-        if (projectsGrid) {
-          projectsGrid.innerHTML = projects.map(project => {
-            const linkUrl = normalizeUrl(project.url);
-            const repoUrl = normalizeUrl(project.repo);
-            const isInternalLink = linkUrl.startsWith('#');
-            const isInternalRepo = repoUrl.startsWith('#');
-
-            return `
-              <article class="project-card ${project.cardClass || ''}">
-                <div class="project-top">
-                  <span class="folder-icon ${project.iconClass || ''}">${project.icon || '▰'}</span>
-                  <span class="project-number">${project.number}</span>
-                </div>
-                <h3>${project.name} ${project.suffix ? `<span>${project.suffix}</span>` : ''}</h3>
-                <p>${project.description}</p>
-                <div class="tech">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
-                <div class="project-links">
-                  <a href="${linkUrl}" ${isInternalLink ? '' : 'target="_blank" rel="noreferrer"'}>${project.linkText}</a>
-                  <a href="${repoUrl}" ${isInternalRepo ? '' : 'target="_blank" rel="noreferrer"'} aria-label="${project.name} repository">⌘</a>
-                </div>
-              </article>
-            `;
-          }).join('');
+        explorer.classList.remove('collapsed');
+        explorer.classList.add('open');
+        activityTools.forEach(btn => btn.classList.toggle('active', btn.dataset.pane === paneName));
+        sidebarPanes.forEach(p => p.classList.toggle('active', p.id === `pane-${paneName}`));
+        if (sidebarTitle) sidebarTitle.textContent = paneTitles[paneName] || 'EXPLORER';
+        if (paneName === 'search') {
+          const sInput = document.getElementById('sidebarSearchInput');
+          if (sInput) {
+            sInput.focus();
+            runSidebarSearch(sInput.value);
+          }
         }
       }
 
+      activityTools.forEach(btn => {
+        btn.addEventListener('click', () => switchSidebarPane(btn.dataset.pane));
+      });
+
+      /* Explorer Accordions (OUTLINE / TIMELINE) */
+      document.querySelectorAll('[data-accordion]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const body = document.getElementById(btn.dataset.accordion);
+          if (!body) return;
+          const open = body.classList.toggle('open');
+          btn.setAttribute('aria-expanded', String(open));
+        });
+      });
+
+      /* Sidebar Search */
+      const sidebarSearchInput = document.getElementById('sidebarSearchInput');
+      const sidebarSearchResults = document.getElementById('sidebarSearchResults');
+
+      function runSidebarSearch(query) {
+        if (!sidebarSearchResults || !env) return;
+        const q = (query || '').trim().toLowerCase();
+        const items = [
+          { file: 'about.md', target: 'about', text: `${env.profile.title} — ${env.profile.summary}` },
+          ...env.skills.map(s => ({ file: 'stack.ts', target: 'skills', text: `${s.title}: ${s.items} (${s.percentage}%)` })),
+          ...env.projects.map(p => ({ file: 'projects.tsx', target: 'projects', text: `${p.name}: ${p.description} [${p.tags.join(', ')}]` })),
+          { file: 'journey.json', target: 'experience', text: 'From prototype to production · full-stack products, AI workflows, deployment' },
+          { file: 'contact.sh', target: 'contact', text: `Email: ${env.profile.email} · GitHub: ${env.profile.github}` }
+        ];
+        const matches = q ? items.filter(i => i.text.toLowerCase().includes(q) || i.file.toLowerCase().includes(q)) : items;
+        sidebarSearchResults.innerHTML = matches.map(m => `
+          <button class="search-hit" type="button" data-jump="${m.target}">
+            <small>${m.file}</small>
+            ${m.text}
+          </button>
+        `).join('');
+      }
+
+      if (sidebarSearchInput) {
+        runSidebarSearch('');
+        sidebarSearchInput.addEventListener('input', () => runSidebarSearch(sidebarSearchInput.value));
+      }
+      if (sidebarSearchResults) {
+        sidebarSearchResults.addEventListener('click', event => {
+          const hit = event.target.closest('[data-jump]');
+          if (!hit) return;
+          const sec = document.getElementById(hit.dataset.jump);
+          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          activateTab(hit.dataset.jump);
+        });
+      }
+
+      /* Git, Extensions & Settings Controls */
+      const openGithubBtn = document.getElementById('openGithubBtn');
+      if (openGithubBtn && env) {
+        openGithubBtn.addEventListener('click', () => window.open(normalizeUrl(env.profile.github), '_blank', 'noopener'));
+      }
+
+      const toggleLinesBtn = document.getElementById('toggleLinesBtn');
+      if (toggleLinesBtn) {
+        toggleLinesBtn.addEventListener('click', () => {
+          const hidden = document.body.classList.toggle('hide-line-numbers');
+          toggleLinesBtn.textContent = hidden ? 'Off' : 'On';
+          toggleLinesBtn.classList.toggle('active', !hidden);
+        });
+      }
+
+      const toggleCompactBtn = document.getElementById('toggleCompactBtn');
+      if (toggleCompactBtn) {
+        toggleCompactBtn.addEventListener('click', () => {
+          const compact = document.body.classList.toggle('compact-mode');
+          toggleCompactBtn.textContent = compact ? 'On' : 'Off';
+          toggleCompactBtn.classList.toggle('active', compact);
+        });
+      }
+
+      const themeSelect = document.getElementById('themeSelect');
+      const statusThemeBtn = document.getElementById('statusThemeBtn');
+      const themeNames = { dark: 'Dark+', tokyo: 'Tokyo Night', catppuccin: 'Catppuccin', emerald: 'Emerald' };
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (themeSelect) themeSelect.value = theme;
+        if (statusThemeBtn) statusThemeBtn.textContent = `◑ Theme: ${themeNames[theme] || 'Dark+'}`;
+        try { localStorage.setItem('portfolio_theme', theme); } catch (e) {}
+      }
+
+      try {
+        const savedTheme = localStorage.getItem('portfolio_theme');
+        if (savedTheme && themeNames[savedTheme]) applyTheme(savedTheme);
+      } catch (e) {}
+
+      if (themeSelect) {
+        themeSelect.addEventListener('change', () => {
+          applyTheme(themeSelect.value);
+          showToast(`Switched theme to ${themeNames[themeSelect.value]}`);
+        });
+      }
+
+      if (statusThemeBtn) {
+        statusThemeBtn.addEventListener('click', () => {
+          const order = ['dark', 'tokyo', 'catppuccin', 'emerald'];
+          const current = document.documentElement.getAttribute('data-theme') || 'dark';
+          const next = order[(order.indexOf(current) + 1) % order.length];
+          applyTheme(next);
+          showToast(`Theme: ${themeNames[next]}`);
+        });
+      }
+
+      const statusGitBtn = document.getElementById('statusGitBtn');
+      if (statusGitBtn) {
+        statusGitBtn.addEventListener('click', () => switchSidebarPane('git'));
+      }
+
+      const resetTabsBtn = document.getElementById('resetTabsBtn');
+      if (resetTabsBtn) {
+        resetTabsBtn.addEventListener('click', () => {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('hidden'));
+          showToast('Restored all editor tabs');
+        });
+      }
+
+      const exportConfigBtn = document.getElementById('exportConfigBtn');
+      if (exportConfigBtn) {
+        exportConfigBtn.addEventListener('click', () => {
+          copyText(JSON.stringify(window.PORTFOLIO_ENV, null, 2), 'Copied PORTFOLIO_ENV JSON to clipboard');
+        });
+      }
+
+      /* Mobile & Desktop Menu Controls */
       function setMenu(open) {
         explorer.classList.toggle('open', open);
-        toggle.setAttribute('aria-expanded', String(open));
+        if (!open && window.innerWidth > 860) {
+          explorer.classList.add('collapsed');
+        } else if (open) {
+          explorer.classList.remove('collapsed');
+        }
+        if (toggle) toggle.setAttribute('aria-expanded', String(open));
       }
 
       if (toggle) toggle.addEventListener('click', () => setMenu(!explorer.classList.contains('open')));
       if (close) close.addEventListener('click', () => setMenu(false));
 
-      treeItems.forEach(item => item.addEventListener('click', () => {
-        treeItems.forEach(link => link.classList.remove('current'));
-        item.classList.add('current');
-        setMenu(false);
-      }));
+      const fileLangMap = {
+        'about.md': 'Markdown',
+        'stack.ts': 'TypeScript',
+        'projects.tsx': 'TypeScript React',
+        'journey.json': 'JSON',
+        'contact.sh': 'Shell Script'
+      };
 
       function activateTab(target) {
         const tab = document.querySelector(`.tab[data-target="${target}"]`);
@@ -1455,6 +2680,7 @@
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
         if (breadcrumbs) breadcrumbs.textContent = tab.dataset.file;
+        if (statusLang) statusLang.textContent = fileLangMap[tab.dataset.file] || 'TypeScript';
       }
 
       function ensureTab(target, file, icon) {
@@ -1465,6 +2691,7 @@
         }
         tab = document.createElement('button');
         tab.className = 'tab';
+        tab.type = 'button';
         tab.setAttribute('role', 'tab');
         tab.setAttribute('aria-selected', 'false');
         tab.dataset.target = target;
@@ -1474,10 +2701,13 @@
         return tab;
       }
 
-      document.querySelectorAll('.tree-item').forEach(link => link.addEventListener('click', () => {
+      treeItems.forEach(link => link.addEventListener('click', () => {
+        treeItems.forEach(item => item.classList.remove('current'));
+        link.classList.add('current');
         const target = link.getAttribute('href').slice(1);
         ensureTab(target, link.dataset.tab, link.querySelector('.file-icon').outerHTML);
         activateTab(target);
+        if (window.innerWidth <= 860) setMenu(false);
       }));
 
       const sections = [...document.querySelectorAll('main section[id]')];
@@ -1495,12 +2725,24 @@
         sections.forEach(section => observer.observe(section));
       }
 
+      if (editorScroller && cursorStatus) {
+        editorScroller.addEventListener('scroll', () => {
+          const line = Math.max(1, Math.min(99, Math.round(editorScroller.scrollTop / 18) + 1));
+          cursorStatus.innerHTML = `Ln ${line}, Col 1 &nbsp; Spaces: 2 &nbsp; UTF-8`;
+        });
+      }
+
       if (tabsContainer) {
         tabsContainer.addEventListener('click', event => {
           const tab = event.target.closest('.tab');
           if (!tab) return;
           if (event.target.closest('[data-close]')) {
             event.stopPropagation();
+            const openTabs = [...document.querySelectorAll('.tab:not(.hidden)')];
+            if (openTabs.length <= 1) {
+              showToast('At least one editor tab must remain open');
+              return;
+            }
             tab.classList.add('hidden');
             const fallback = document.querySelector('.tab:not(.hidden)');
             if (fallback) activateTab(fallback.dataset.target);
@@ -1514,11 +2756,139 @@
         });
       }
 
+      /* Copy Email & Contact Form Composer */
+      const copyEmailBtn = document.getElementById('copyEmailBtn');
+      const copyEmailTopBtn = document.getElementById('copyEmailTopBtn');
+      if (copyEmailBtn && env) {
+        copyEmailBtn.addEventListener('click', () => copyText(env.profile.email, `Copied ${env.profile.email}`));
+      }
+      if (copyEmailTopBtn && env) {
+        copyEmailTopBtn.addEventListener('click', () => copyText(env.profile.email, `Copied ${env.profile.email}`));
+      }
+
+      const contactForm = document.getElementById('contactForm');
+      const copyDraftBtn = document.getElementById('copyDraftBtn');
+
+      function buildContactDraft() {
+        const name = (document.getElementById('senderName').value || 'Visitor').trim();
+        const email = (document.getElementById('senderEmail').value || '').trim();
+        const subject = (document.getElementById('senderSubject').value || 'Portfolio Inquiry').trim();
+        const message = (document.getElementById('senderMessage').value || '').trim();
+        return { name, email, subject, body: `Hi Saurabh,\n\n${message}\n\nBest,\n${name}${email ? ` (${email})` : ''}` };
+      }
+
+      if (contactForm && env) {
+        contactForm.addEventListener('submit', event => {
+          event.preventDefault();
+          const draft = buildContactDraft();
+          const mailtoUrl = `mailto:${env.profile.email}?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+          window.location.href = mailtoUrl;
+          showToast('Opened email client with your drafted message');
+        });
+      }
+
+      if (copyDraftBtn) {
+        copyDraftBtn.addEventListener('click', () => {
+          const draft = buildContactDraft();
+          copyText(`Subject: ${draft.subject}\n\n${draft.body}`, 'Copied message draft to clipboard');
+        });
+      }
+
+      /* Command Palette Modal (Ctrl+K / Cmd+K) */
+      const paletteModal = document.getElementById('paletteModal');
+      const paletteInput = document.getElementById('paletteInput');
+      const paletteList = document.getElementById('paletteList');
+      const commandPaletteBtn = document.getElementById('commandPaletteBtn');
+      const mobilePaletteBtn = document.getElementById('mobilePaletteBtn');
+
+      const paletteCommands = [
+        { label: 'Go to About (about.md)', hint: 'Section 01', action: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go to Technical Toolkit (stack.ts)', hint: 'Section 02', action: () => document.getElementById('skills').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go to Featured Projects (projects.tsx)', hint: 'Section 03', action: () => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go to How I Work (journey.json)', hint: 'Section 04', action: () => document.getElementById('experience').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go to Contact Composer (contact.sh)', hint: 'Section 05', action: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Toggle Interactive Terminal', hint: 'Terminal', action: () => setTerminal(!terminalPanel.classList.contains('open')) },
+        { label: 'Inspect Project: Synaptiq AI', hint: 'Case Study', action: () => openProjectInspector('01') },
+        { label: 'Inspect Project: DeployCode / VibeDeploy', hint: 'Case Study', action: () => openProjectInspector('02') },
+        { label: 'Inspect Project: Realtime Chat', hint: 'Case Study', action: () => openProjectInspector('03') },
+        { label: 'Inspect Project: Water Monitoring IoT', hint: 'Case Study', action: () => openProjectInspector('04') },
+        { label: 'Copy Developer Email Address', hint: env ? env.profile.email : 'Clipboard', action: () => copyText(env.profile.email, `Copied ${env.profile.email}`) },
+        { label: 'Theme: Switch to Tokyo Night', hint: 'Appearance', action: () => applyTheme('tokyo') },
+        { label: 'Theme: Switch to Catppuccin Mocha', hint: 'Appearance', action: () => applyTheme('catppuccin') },
+        { label: 'Theme: Switch to Emerald Matrix', hint: 'Appearance', action: () => applyTheme('emerald') },
+        { label: 'Theme: Switch to VS Code Dark+', hint: 'Appearance', action: () => applyTheme('dark') }
+      ];
+
+      function renderPalette(filterText = '') {
+        if (!paletteList) return;
+        const q = filterText.trim().toLowerCase();
+        const filtered = paletteCommands.filter(c => c.label.toLowerCase().includes(q) || c.hint.toLowerCase().includes(q));
+        paletteList.innerHTML = filtered.map((cmd, idx) => `
+          <button class="palette-item ${idx === 0 ? 'selected' : ''}" type="button" data-cmd-idx="${paletteCommands.indexOf(cmd)}">
+            <span>${cmd.label}</span>
+            <small>${cmd.hint}</small>
+          </button>
+        `).join('');
+      }
+
+      function openPalette() {
+        if (!paletteModal) return;
+        paletteModal.classList.add('open');
+        if (paletteInput) {
+          paletteInput.value = '';
+          renderPalette('');
+          paletteInput.focus();
+        }
+      }
+
+      if (commandPaletteBtn) commandPaletteBtn.addEventListener('click', openPalette);
+      if (mobilePaletteBtn) mobilePaletteBtn.addEventListener('click', openPalette);
+
+      if (paletteInput) {
+        paletteInput.addEventListener('input', () => renderPalette(paletteInput.value));
+      }
+
+      if (paletteList) {
+        paletteList.addEventListener('click', event => {
+          const item = event.target.closest('[data-cmd-idx]');
+          if (!item) return;
+          const cmd = paletteCommands[Number(item.dataset.cmdIdx)];
+          paletteModal.classList.remove('open');
+          if (cmd) cmd.action();
+        });
+      }
+
+      if (paletteModal) {
+        paletteModal.addEventListener('click', event => {
+          if (event.target === paletteModal) paletteModal.classList.remove('open');
+        });
+      }
+
+      window.addEventListener('keydown', event => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+          event.preventDefault();
+          if (paletteModal.classList.contains('open')) {
+            paletteModal.classList.remove('open');
+          } else {
+            openPalette();
+          }
+        } else if (event.key === 'Escape') {
+          paletteModal.classList.remove('open');
+          projectModal.classList.remove('open');
+        }
+      });
+
+      /* Interactive Terminal */
       function setTerminal(open) {
         terminalPanel.classList.toggle('open', open);
         terminalPanel.setAttribute('aria-hidden', String(!open));
         terminalToggle.setAttribute('aria-expanded', String(open));
         if (open) terminalInput.focus();
+      }
+
+      const heroTerminalBtn = document.getElementById('heroTerminalBtn');
+      if (heroTerminalBtn) {
+        heroTerminalBtn.addEventListener('click', () => setTerminal(true));
       }
 
       if (terminalToggle) {
@@ -1532,7 +2902,7 @@
         return {
           'about.md': `# About\n${env ? env.profile.summary : ''}`,
           'stack.ts': env ? env.skills.map(skill => `${skill.title}: ${skill.items} (${skill.percentage}%)`).join('\n') : '',
-          'projects.tsx': env ? env.projects.map(project => `${project.name}: ${project.description}\nTags: ${project.tags.join(', ')}`).join('\n\n') : '',
+          'projects.tsx': env ? env.projects.map(project => `${project.name}: ${project.description}\nTags: ${project.tags.join(', ')}\nURL: ${project.url}`).join('\n\n') : '',
           'journey.json': '{\n  "mindset": "learn deeply, ship thoughtfully",\n  "focus": ["full-stack products", "AI workflows", "deployment"]\n}',
           'contact.sh': env ? `EMAIL=${env.profile.email}\nGITHUB=${env.profile.github}` : ''
         };
@@ -1546,37 +2916,102 @@
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
       }
 
+      function executeTerminalCommand(rawCommand) {
+        const command = rawCommand.trim();
+        if (!command) return;
+        cmdHistory.push(command);
+        historyIndex = cmdHistory.length;
+        printTerminal(`visitor@portfolio:~$ ${command}`, 'command-line');
+        const [program, ...args] = command.split(/\s+/);
+        const files = terminalFiles();
+
+        if (program === 'help') {
+          printTerminal('Available commands: help, whoami, skills, projects, open <project>, contact, ls, cat <file>, grep <text> [file], git <status|log>, theme <dark|tokyo|catppuccin|emerald>, clear');
+        } else if (program === 'whoami') {
+          printTerminal(`${env.profile.title} — ${env.profile.summary}\nAvailability: ${env.profile.availability}`);
+        } else if (program === 'skills') {
+          printTerminal(env.skills.map(s => `• ${s.title.padEnd(10)} [${s.percentage}%] ${s.items}`).join('\n'));
+        } else if (program === 'projects') {
+          printTerminal(env.projects.map(p => `${p.number}. ${p.name} (${p.tags.join(', ')}) -> ${p.url}`).join('\n'));
+        } else if (program === 'open') {
+          const name = args.join(' ').toLowerCase();
+          const match = env.projects.find(p => p.name.toLowerCase().includes(name) || p.number === name);
+          if (!name || !match) {
+            printTerminal('open: specify a project name or number (e.g., open synaptiq or open 02)', 'error');
+          } else {
+            printTerminal(`Opening inspector for ${match.name}...`);
+            openProjectInspector(match.number);
+          }
+        } else if (program === 'contact') {
+          printTerminal(`Email: ${env.profile.email}\nGitHub: ${env.profile.github}`);
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        } else if (program === 'git') {
+          if (args[0] === 'log') {
+            printTerminal('commit feat(ui): Add command palette, live search, filters & inspector\ncommit f3db660: Consolidate portfolio config in window.PORTFOLIO_ENV');
+          } else {
+            printTerminal('On branch main — working tree clean. Remote: ' + env.profile.github);
+          }
+        } else if (program === 'theme') {
+          const t = (args[0] || '').toLowerCase();
+          if (themeNames[t]) {
+            applyTheme(t);
+            printTerminal(`Switched color theme to ${themeNames[t]}.`);
+          } else {
+            printTerminal('Usage: theme <dark|tokyo|catppuccin|emerald>', 'error');
+          }
+        } else if (program === 'ls') {
+          printTerminal(Object.keys(files).join('  '));
+        } else if (program === 'cat') {
+          printTerminal(args[0] && files[args[0]] ? files[args[0]] : 'cat: choose a file shown by ls', 'error');
+        } else if (program === 'grep') {
+          const [term, file] = args;
+          const source = file ? files[file] : Object.values(files).join('\n');
+          if (!term) {
+            printTerminal('grep: provide text to search for', 'error');
+          } else if (!source) {
+            printTerminal(`grep: ${file}: file not found`, 'error');
+          } else {
+            const matches = source.split('\n').filter(line => line.toLowerCase().includes(term.toLowerCase()));
+            printTerminal(matches.length ? matches.join('\n') : `No matches for "${term}".`);
+          }
+        } else if (program === 'clear') {
+          terminalOutput.innerHTML = '';
+        } else {
+          printTerminal(`Command not available: ${program}. Type help.`, 'error');
+        }
+      }
+
+      document.querySelectorAll('[data-cmd]').forEach(chip => {
+        chip.addEventListener('click', () => executeTerminalCommand(chip.dataset.cmd));
+      });
+
+      if (terminalInput) {
+        terminalInput.addEventListener('keydown', event => {
+          if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            if (historyIndex > 0) {
+              historyIndex--;
+              terminalInput.value = cmdHistory[historyIndex];
+            }
+          } else if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            if (historyIndex < cmdHistory.length - 1) {
+              historyIndex++;
+              terminalInput.value = cmdHistory[historyIndex];
+            } else {
+              historyIndex = cmdHistory.length;
+              terminalInput.value = '';
+            }
+          }
+        });
+      }
+
       if (terminalForm) {
         terminalForm.addEventListener('submit', event => {
           event.preventDefault();
-          const command = terminalInput.value.trim();
-          if (!command) return;
-          printTerminal(`visitor@portfolio:~$ ${command}`, 'command-line');
+          const command = terminalInput.value;
           terminalInput.value = '';
-          const [program, ...args] = command.split(/\s+/);
-          const files = terminalFiles();
-          if (program === 'help') {
-            printTerminal('Available: help, ls, cat <file>, grep <text> [file], clear');
-          } else if (program === 'ls') {
-            printTerminal(Object.keys(files).join('  '));
-          } else if (program === 'cat') {
-            printTerminal(args[0] && files[args[0]] ? files[args[0]] : 'cat: choose a file shown by ls', 'error');
-          } else if (program === 'grep') {
-            const [term, file] = args;
-            const source = file ? files[file] : Object.values(files).join('\n');
-            if (!term) {
-              printTerminal('grep: provide text to search for', 'error');
-            } else if (!source) {
-              printTerminal(`grep: ${file}: file not found`, 'error');
-            } else {
-              const matches = source.split('\n').filter(line => line.toLowerCase().includes(term.toLowerCase()));
-              printTerminal(matches.length ? matches.join('\n') : `No matches for "${term}".`);
-            }
-          } else if (program === 'clear') {
-            terminalOutput.innerHTML = '';
-          } else {
-            printTerminal(`Command not available: ${program}. Type help.`, 'error');
-          }
+          executeTerminalCommand(command);
         });
       }
     })();
